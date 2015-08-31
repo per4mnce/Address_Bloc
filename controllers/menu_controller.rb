@@ -1,101 +1,139 @@
 require_relative '../models/address_book'
 
 class MenuController
- attr_accessor :address_book
+    attr_accessor :address_book
 
- def initialize
-  @address_book = AddressBook.new
- end
+    def initialize
+        @address_book = AddressBook.new
+    end
 
- def main_menu
-  puts "Main Menu - #{@address_book.entries.count} entries"
-  puts "1 - View all entries"
-  puts "2 - Create an entry"
-  puts "3 - Search for an entry"
-  puts "4 - Import entries from a CSV"
-  puts "5 - Exit"
-  print "Enter your selection: "
+    def main_menu
+        puts "Main Menu - #{@address_book.entries.count} entries"
+        puts "0 - View a specific entry"
+        puts "1 - View all entries"
+        puts "2 - Create an entry"
+        puts "3 - Search for an entry"
+        puts "4 - Import entries from a CSV"
+        puts "5 - Exit"
+        print "Enter your selection: "
 
-  selection = gets.to_i
-  case selection
-   when 1
-    system "clear"
-    view_all_entries
-    main_menu
-   when 2
-    system "clear"
-    create_entry
-    main_menu
-   when 3
-    system "clear"
-    search_entries
-    main_menu
-   when 4
-    system "clear"
-    read_csv
-    main_menu
-   when 5
-    puts "Good-bye!"
-    exit(0)
-   else
-    system "clear"
-    puts "Sorry, that is not a valid input"
-    main_menu
-   end
- end
-
- def view_all_entries
-    @address_book.entries.each do |entry|
-     system "clear"
-     puts entry.to_s
-     entry_submenu(entry)
+        selection = gets.to_i
+        case selection
+        when 0
+            system "clear"
+            view_entry
+            main_menu
+        when 1
+            system "clear"
+            view_all_entries
+            main_menu
+        when 2
+            system "clear"
+            create_entry
+            main_menu
+        when 3
+            system "clear"
+            search_entries
+            main_menu
+        when 4
+            system "clear"
+            read_csv
+            main_menu
+        when 5
+            puts "Good-bye!"
+            exit(0)
+        else
+            system "clear"
+            puts "Sorry, that is not a valid input"
+            main_menu
+        end
     end
  
-    system "clear"
-    puts "End of entries"
- end
- 
- def create_entry
-  system "clear"
-  puts "New AddressBloc Entry"
-  print "Name: "
-  name = gets.chomp
-  print "Phone number: "
-  phone = gets.chomp
-  print "Email: "
-  email = gets.chomp
-  @address_book.add_entry(name, phone, email)
- 
-  system "clear"
-  puts "New entry created"
- end
- 
-  def search_entries
-  end
- 
-  def read_csv 
-  end
-  
-  def entry_submenu(entry)
-    puts "n - next entry"
-    puts "d - delete entry"
-    puts "e - edit this entry"
-    puts "m - return to main menu"
+    def view_entry
+        system "clear"
+        entries = @address_book.entries.count
+        puts "#{entries} entries" 
+        
+        #Handle 0 entries
+        if entries == 0
+            puts "No entries are available"
+            puts "Press the enter key to contnue"
+            response = gets
+            system "clear"
+            main_menu
+        else
+            puts "Type an entry number (range is 0 to #{entries - 1})"
+            selection = gets.to_i #convert selection to integer.
 
-    selection = gets.chomp
+            #Handle invalid input
+            if selection < 0 || selection > ( entries - 1)
+                puts "#{selection} is not a valid input.  Please try again"
+                response = gets
+                system "clear"
+                view_entry
+            else
+                #Display the entry
+                puts @address_book.entries[selection].to_s
+                puts "Press the enter key to contnue"
+                response = gets
+                system "clear"     
+            end
+        end
+    end
+
+    def view_all_entries
+        @address_book.entries.each do |entry|
+            system "clear"
+            puts entry.to_s
+            entry_submenu(entry)
+        end
  
-    case selection
-     when "n"
-     when "d"
-     when "e"
-     when "m"
-       system "clear"
-       main_menu
-     else
-       system "clear"
-       puts "#{selection} is not a valid input"
-       entries_submenu(entry)
-     end
-   end
+        system "clear"
+        puts "End of entries"
+    end
+ 
+    def create_entry
+        system "clear"
+        puts "New AddressBloc Entry"
+        print "Name: "
+        name = gets.chomp
+        print "Phone number: "
+        phone = gets.chomp
+        print "Email: "
+        email = gets.chomp
+        @address_book.add_entry(name, phone, email)
+        
+        system "clear"
+        puts "New entry created"
+    end
+    
+    def search_entries
+        
+    end
+ 
+    def read_csv 
+      
+    end
   
+    def entry_submenu(entry)
+        puts "n - next entry"
+        puts "d - delete entry"
+        puts "e - edit this entry"
+        puts "m - return to main menu"
+        
+        selection = gets.chomp
+ 
+        case selection
+            when "n"
+            when "d"
+            when "e"
+            when "m"
+            system "clear" 
+            main_menu
+        else
+            system "clear"
+            puts "#{selection} is not a valid input"
+            entries_submenu(entry)
+        end
+    end
 end
