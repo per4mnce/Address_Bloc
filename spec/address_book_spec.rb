@@ -36,7 +36,7 @@ require_relative '../models/address_book'
    end
  end
 
- # #6
+ # #6  Helper method
     def check_entry(entry, expected_name, expected_number, expected_email)
         expect(entry.name).to eql expected_name
         expect(entry.phone_number).to eql expected_number
@@ -107,6 +107,49 @@ require_relative '../models/address_book'
        # expect(entry_five.phone_number).to eql "555-555-2036"
        # expect(entry.email).to eql "sussie@blocmail.com"
      end
+ 
+   end
+   
+   
+ 
+  # -------------------------------------------------------------------------------
+  # Assignment 21 Tests
+  # Test AddressBook's .import_from_csv() method is working as expected
+  # *** Don't forget the entries read from the CSV file are sorted by first name
+  #     This means the array order is different than the CSV order
+  # -------------------------------------------------------------------------------
+   
+   let(:book) { AddressBook.new }
+   
+   describe "#import_from_csv Part 2" do
+     it "imports the correct number of entries" do
+       book.import_from_csv("entries_2.csv")  # New CSV file
+       book_size = book.entries.size
+       # Check the size of the entries in AddressBook
+       expect(book_size).to eql 3 # Only 3 entrties in entries_2.csv
+     end
+     
+ # #4  
+    it "imports the 1st entry" do
+       book.import_from_csv("entries_2.csv")
+       # Check the first entry
+       entry_one = book.entries[0]
+       check_entry(entry_one, "Elena", "333-33-3333", "elena@foo.com")
+    end
+ 
+    it "imports the 2nd entry" do
+       book.import_from_csv("entries_2.csv")
+       # Check the second entry
+       entry_two = book.entries[1]
+       check_entry(entry_two, "Henry", "111-111-1111", "henry@foo.com")
+    end
+ 
+    it "imports the 3rd entry" do
+       book.import_from_csv("entries_2.csv")
+       # Check the third entry
+       entry_three = book.entries[2]
+       check_entry(entry_three, "Natalie", "333-33-3333", "natalie@foo.com")
+    end
  
    end
  end
