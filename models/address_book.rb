@@ -54,4 +54,14 @@
      return nil
    end
    
+   #Exercise 22
+   def iterative_search(name)
+       entries.each do |e|
+           if e.name == name
+               return e
+           end
+       end
+       return nil
+   end
+   
  end
