@@ -9,6 +9,8 @@ class MenuController
 
     def main_menu
         puts "Main Menu - #{@address_book.entries.count} entries"
+        puts "0 - *** NUKE *** Delete all entries"
+        puts "2 - Create an entry"
         puts "1 - View all entries"
         puts "2 - Create an entry"
         puts "3 - Search for an entry"
@@ -18,6 +20,10 @@ class MenuController
 
         selection = gets.to_i
         case selection
+            when 0
+                system "clear"
+                nuke
+                main_menu
             when 1
                 system "clear"
                 view_all_entries
@@ -41,6 +47,22 @@ class MenuController
                 system "clear"
                 puts "Sorry, that is not a valid input"
                 main_menu
+        end
+    end
+
+    def nuke
+        # Delete all entries
+        system "clear"
+        puts "WARNING:  *** You are about to permanently NUKE all your entries ***"
+        puts "You must enter NUKE to continue the deletion process"
+        puts "Enter anything else to avoid deletion"
+        response = gets.chomp
+        if response == "NUKE"
+            # elete all entries in the @address_book array
+            @address_book = []
+            puts "Entries deleted"
+        else
+            puts "Entries NOT deleted"
         end
     end
 
