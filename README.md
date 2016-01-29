@@ -1,13 +1,13 @@
 # Address-Bloc
-My first Ruby application is an address book called Address Bloc.
+My first Ruby application is an address book.
  
 ## Features:
-* How to run a Ruby program from the command line
-* Create an interactive menu
-* Represent the address book and entries with Ruby models
+* Ruby program from the command line
+* Interactive menus
+* Ruby models used to represent data
 * Import entries from a file
-* search the address book
-* testing
+* Search
+* Testing
  
 ## Technology Focus:
 Ruby, Command line, Cloud-9
