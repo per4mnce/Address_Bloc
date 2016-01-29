@@ -10,7 +10,7 @@ My first Ruby application is an address book called Address Bloc.
 * testing
  
 ## Technology Focus:
-Ruby
+Ruby, Command line
 
 ## User Interface:
 ![Screen View](https://static.wixstatic.com/media/045a70_c950e894c81a4a718dec8cd2b49b9c51.jpg/v1/fill/w_257,h_175,al_c,lg_1,q_80/045a70_c950e894c81a4a718dec8cd2b49b9c51.jpg)
